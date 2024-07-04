@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import '../css/pages/userEdit.scss'
 import { useAuth } from '../functions/auth/authContext'
-import { faEnvelope, faLock, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock, faPhone, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import ValidateButton from '../components/validateButton'
 import axios from 'axios'
 import TopBar from '../components/topBar'
@@ -83,6 +85,11 @@ function UserEdit() {
     <div className='userEdit-container'>
       <TopBar />
 
+      <div className="back-button">
+      <FontAwesomeIcon icon={faArrowLeft} />
+        <Link to='/userinfos'>Back</Link>
+      </div>
+
       <div className='page-title'>
         <h1>Change info</h1>
         <p>changes will be reflected to every services</p>
@@ -92,6 +99,7 @@ function UserEdit() {
 
         <div className="info-image">
           <div className="profile-image">
+            <FontAwesomeIcon className='icon-camera' icon={faCamera} />
             <img src={avatar} alt='profile-picture' width='50px' />
           </div>
           <p>Change photo</p>
