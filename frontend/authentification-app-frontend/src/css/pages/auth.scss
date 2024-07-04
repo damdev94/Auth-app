@@ -1,0 +1,32 @@
+.auth-container {
+
+  max-height: 100vh;
+  padding: 10px;
+
+  .inputs {
+    margin-top: 10%;
+    margin-bottom: 10%;
+
+    .error-login-message {
+      color: red;
+    }
+
+    .signin-link, .signup-link{
+      width: 95%;
+      display: flex;
+      justify-content: end;
+    }
+  }
+
+  .validation {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .social-container {
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -11,6 +11,17 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.log('Error connecting to MongoDB !'))
 
+  mongoose.connection.on('connected', () => {
+    mongoose.connection.db.collection('users').dropIndexes((err, result) => {
+      if (err) {
+        console.error('Error dropping indexes:', err);
+      } else {
+        console.log('Indexes dropped:', result);
+      }
+    });
+  });
+
+server.use(cors())
 server.use(express.json())
 server.use(router)
 

@@ -26,7 +26,7 @@ exports.signUp = (req, res) => {
 
         delete body.password
 
-        new user({userName : body.userName, phone: body.phone, photo: body.photo, password : hash})
+        new user({email : body.email, phone: body.phone, photo: body.photo, password : hash})
           .save()
           .then((user) => {
             console.log(user)
@@ -42,7 +42,7 @@ exports.signUp = (req, res) => {
 }
 
 exports.signIn = (req, res) => {
-  const userName = req.body.userName
+  const email = req.body.email
   const password = req.body.password
 
   /* validation des données */
@@ -54,7 +54,7 @@ exports.signIn = (req, res) => {
 
   /* trouver l'user dans la base de données */
 
-  user.findOne({userName: userName})
+  user.findOne({email: email})
     .then((user) => {
       if(!user) return res.status(404).json({ msg : "user not found "})
 
@@ -63,7 +63,7 @@ exports.signIn = (req, res) => {
         .then((match) => {
           if(!match) return res.status(500).json({ msg: "server error"})
           res.status(200).json( {
-            userName : user.userName,
+            email : user.email,
             id : user._id,
             token : jwt.sign( { id: user._id }, process.env.SECRET_KEY, {expiresIn : "12h"})
           })
@@ -73,3 +73,67 @@ exports.signIn = (req, res) => {
   })
     .catch((err) => res.status(500).json(err))
 }
+
+exports.index= (req, res) => {
+  user.find()
+    .exec()
+    .then(user => {
+      res.json(user)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: "Error retrieving user data"})
+    })
+}
+
+exports.update = (req, res) => {
+  const userId = req.params.id;
+  const newUserData = {};
+  console.log(userId)
+
+  if (req.body.email) {
+    newUserData.email = req.body.email;
+  }
+
+  if (req.body.phone) {
+    newUserData.phone = req.body.phone;
+  }
+
+  if (req.body.photo) {
+    newUserData.photo = req.body.photo;
+  }
+
+  if (req.body.password) {
+    bcrypt.hash(req.body.password, 10)
+      .then(hash => {
+        newUserData.password = hash;
+        updateUser(userId, newUserData, res);
+      })
+      .catch(err => {
+        console.log(err);
+        return res.status(500).json({
+          error: err
+        });
+      });
+  } else {
+    updateUser(userId, newUserData, res);
+  }
+
+  function updateUser(userId, newUserData, res) {
+    user.updateOne({ _id: userId }, { $set: newUserData })
+      .exec()
+      .then(result => {
+        console.log(result);
+        res.status(200).json({
+          message: 'User updated',
+          updatedFields: newUserData
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  }
+};

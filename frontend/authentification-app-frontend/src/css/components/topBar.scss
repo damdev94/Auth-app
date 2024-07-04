@@ -1,0 +1,23 @@
+.topBar-container {
+  display: flex;
+  justify-content: space-between;
+  .logo {
+    display: flex;
+    align-items: center;
+
+    img{
+      width: 50px;
+      margin-right: 10px;
+    }
+
+    span{
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+  .avatar {
+    img {
+      width: 50px;
+    }
+  }
+}

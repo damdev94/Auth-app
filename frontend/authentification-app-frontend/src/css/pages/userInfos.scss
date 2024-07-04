@@ -1,0 +1,56 @@
+.userInfos-container {
+  .page-title {
+    text-align: center;
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10%;
+    padding: 0 10px;
+
+    .title {
+      width: 50%;
+
+      h2 {
+        font-weight: 600;
+        margin: 10px 0;
+      }
+
+      p {
+        margin: 0;
+        color: #828282;
+      }
+    }
+
+    a {
+      padding: 10px 40px;
+      border: solid 2px #828282;
+      opacity: 0.9;
+      border-radius: 15px;
+      text-decoration: none;
+      color: #828282;
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+
+  .infos-list {
+    .info {
+      padding: 0 10px;
+      height: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: solid 1px #D3D3D3;
+      img {
+        width: 50px;
+      }
+
+      h4 {
+        color: #a8a8a8;
+      }
+    }
+  }
+}

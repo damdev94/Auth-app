@@ -1,0 +1,29 @@
+.userEdit-container {
+  .page-title {
+    width: 70%;
+    margin-top: 15%;
+    margin-bottom: 10%;
+  }
+
+  .infos-list {
+
+    .info-image {
+      display: flex;
+      align-items: center;
+
+      p {
+        margin-left: 20px;
+        text-transform: uppercase;
+      }
+    }
+
+    .info {
+      margin: 15px 0;
+
+      p {
+        margin: 0 5px;
+      }
+    }
+
+  }
+}

@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../css/components/validateButton.scss'
 
-function ValidateButton() {
+function ValidateButton({text}) {
   return (
     <div className='validate-button'>
-      <Link to='/' > Create </Link>
+      <div > {text} </div>
     </div>
   )
 }
