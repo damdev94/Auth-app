@@ -14,6 +14,6 @@ router.get('/', (req, res) => {
 
 router.get('/userinfos', usersController.index)
 
-router.put('/userinfos/edit/:id', usersController.update)
+router.put('/userinfos/edit/:id', usersController.upload.single('photo'), usersController.update)
 
 module.exports = router

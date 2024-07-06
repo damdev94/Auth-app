@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import '../css/pages/userEdit.scss'
 import { useAuth } from '../functions/auth/authContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,6 +21,8 @@ function UserEdit() {
   const [emailData, setEmailData] = useState('')
   const [phoneData, setPhoneData] = useState('')
   const [passwordData, setPasswordData] = useState('')
+
+  const fileInputRef = useRef(null)
 
 
   useEffect(() => {
@@ -52,28 +54,36 @@ function UserEdit() {
     }
   }, [userInfos])
 
+  const handleFileChange = (e) => {
+    setPhotoData(e.target.files[0])
+    console.log(e.target.files[0])
+  }
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const id = userInfos._id
 
-    const newUserData = {
-      photo: photoData,
-      email: emailData,
-      phone: phoneData,
-      password: passwordData
+    const formData = new FormData()
+    formData.append('email', emailData)
+    formData.append('phone', phoneData)
+    formData.append('password', passwordData)
+
+    if (photoData) {
+      console.log(photoData)
+      formData.append('photo', photoData)
     }
 
-    axios.put(`http://localhost:5000/userinfos/edit/${id}`, newUserData, {
+    axios.put(`http://localhost:5000/userinfos/edit/${id}`, formData, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
       },
     })
     .then(res => {
       console.log('User updated !')
-      navigate('/userinfos/edit')
+      navigate('/userinfos')
     })
     .catch(err => {
       console.error('Error update user:', err)
@@ -97,11 +107,22 @@ function UserEdit() {
       <div className="infos-list">
 
         <div className="info-image">
+
           <div className="profile-image">
             <FontAwesomeIcon className='icon-camera' icon={faCamera} />
-            <img src={userInfos && (`http://localhost:5000${userInfos.photo}`)} alt='profile-picture' width='50px' />
+            <img
+              src={userInfos && (`http://localhost:5000${userInfos.photo}`)}
+              alt='profile-picture' width='50px'
+            />
           </div>
-          <p>Change photo</p>
+
+          <input
+            type="file"
+            onChange={handleFileChange}
+            accept="image/*"
+            ref={fileInputRef}
+          />
+          <p onClick={() => fileInputRef.current.click()}>Change photo</p>
         </div>
 
         <div className="info">
@@ -130,7 +151,7 @@ function UserEdit() {
           <p>Password</p>
           <InputForm
             type='password'
-            placeholder='00000000'
+            placeholder='******'
             value={passwordData}
             onChange={(e) => setPasswordData(e.target.value)}
             icon={faLock}
@@ -139,7 +160,7 @@ function UserEdit() {
 
         <div className="validation">
 
-        <Link to='/userinfos/edit' onClick={handleSubmit}>
+        <Link to='/userinfos' onClick={handleSubmit}>
           <ValidateButton
               text= 'Submit'
           />

@@ -121,7 +121,6 @@ exports.index= (req, res) => {
 exports.update = (req, res) => {
   const userId = req.params.id;
   const newUserData = {};
-  console.log(userId)
 
   if (req.body.email) {
     newUserData.email = req.body.email;
@@ -131,8 +130,9 @@ exports.update = (req, res) => {
     newUserData.phone = req.body.phone;
   }
 
-  if (req.body.photo) {
-    newUserData.photo = req.body.photo;
+  if (req.file) {
+    console.log(`filename: ${req.file.filename}`)
+    newUserData.photo = `/public/images/${req.file.filename}`
   }
 
   if (req.body.password) {
@@ -169,3 +169,5 @@ exports.update = (req, res) => {
       });
   }
 }
+
+exports.upload = upload
