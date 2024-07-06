@@ -1,9 +1,41 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const multer = require("multer")
+const path = require("path")
 const user = require('../models/user')
 const userValidation = require('../validation/validation')
 require('dotenv').config()
+
+//multer
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, '../public/images'))
+  },
+  filename: (req, file, cb) => {
+    const date = new Date().toISOString().replace(/:/g, '-')
+    const ext = path.extname(file.originalname)
+    const newName = `${date}-${Math.round(Math.random() * 10000)}${ext.toLowerCase()}`
+    cb(null, newName)
+  }
+})
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(new Error("Image format not accepted"), false)
+  }
+}
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+})
 
 exports.signUp = (req, res) => {
 
@@ -136,4 +168,4 @@ exports.update = (req, res) => {
         });
       });
   }
-};
+}

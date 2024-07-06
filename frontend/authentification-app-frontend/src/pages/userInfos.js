@@ -4,11 +4,10 @@ import axios from 'axios'
 import '../css/pages/userInfos.scss'
 import TopBar from '../components/topBar'
 import { Link } from 'react-router-dom'
-import avatar from '../images/avatar.jpg'
 
 function UserInfos() {
 
-  const {logout, token, userEmail} = useAuth()
+  const {logout, user, token, userEmail} = useAuth()
   const [userInfos, setUserInfos] = useState(null)
 
   useEffect(() => {
@@ -34,7 +33,8 @@ function UserInfos() {
 
   useEffect(() => {
     if (userInfos) {
-      console.log(userInfos)
+      /* console.log(userInfos) */
+      user(userInfos)
     }
   }, [userInfos])
 
@@ -65,7 +65,7 @@ function UserInfos() {
       <div className="infos-list">
         <div className="info">
           <h4>Photo</h4>
-          <img src={avatar} alt='profile-picture' />
+          <img src={userInfos && (`http://localhost:5000${userInfos.photo}`)} alt='profile-picture' />
         </div>
         <div className="info">
           <h4>Phone</h4>

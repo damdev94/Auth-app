@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { useAuth } from '../functions/auth/authContext'
 import '../css/components/topBar.scss'
 import logo from '../images/auth-logo.svg'
-import avatar from '../images/avatar.jpg'
 
-function topBar({onclick}) {
+
+function TopBar({onclick}) {
+
+  const { userInfos } = useAuth()
+
   return (
     <div>
        <div className='topBar-container'>
@@ -12,11 +16,11 @@ function topBar({onclick}) {
           <span>devchallenges</span>
         </div>
         <div className="avatar">
-          <img src={avatar} alt="avatar-img" onClick= {onclick} />
+          <img src={userInfos && (`http://localhost:5000${userInfos.photo}`)} alt="avatar-img" onClick= {onclick} />
         </div>
       </div>
     </div>
   )
 }
 
-export default topBar
+export default TopBar

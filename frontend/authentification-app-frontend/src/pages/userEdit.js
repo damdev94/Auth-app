@@ -7,7 +7,6 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import ValidateButton from '../components/validateButton'
 import axios from 'axios'
 import TopBar from '../components/topBar'
-import avatar from '../images/avatar.jpg'
 import InputForm from '../components/auth/inputForm'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -100,7 +99,7 @@ function UserEdit() {
         <div className="info-image">
           <div className="profile-image">
             <FontAwesomeIcon className='icon-camera' icon={faCamera} />
-            <img src={avatar} alt='profile-picture' width='50px' />
+            <img src={userInfos && (`http://localhost:5000${userInfos.photo}`)} alt='profile-picture' width='50px' />
           </div>
           <p>Change photo</p>
         </div>
