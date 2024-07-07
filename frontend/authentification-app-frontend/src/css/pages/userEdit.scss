@@ -49,7 +49,7 @@
       .icon-camera {
         position: absolute;
         top: 24%;
-        left: 7%;
+        left: 25px;
         opacity: 0.8;
         font-size: 32px;
         color: gainsboro;
@@ -77,6 +77,48 @@
       color: white;
       font-size: 20px;
       font-weight: bold;
+    }
+  }
+}
+
+@media (min-width: 800px) {
+
+  .back-button {
+    margin-left: 22.5%;
+    margin-top: 50px !important;
+    margin-bottom: 50px;
+  }
+
+  .content-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 3px solid rgba($color: #000000, $alpha: 0.1);
+    border-radius: 5px;
+
+    .page-title {
+      font-size: 12px;
+      margin-bottom: 30px;
+    }
+
+    .info-image {
+      p {
+        cursor: pointer;
+      }
+    }
+
+    .infos-list {
+      input {
+        width: 40%;
+      }
+    }
+  }
+  .validation {
+    width: 10%;
+
+    .validate-button {
+      font-size: 12px;
     }
   }
 }

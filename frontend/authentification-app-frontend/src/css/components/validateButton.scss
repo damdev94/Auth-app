@@ -10,3 +10,9 @@
     font-weight: bold;
   }
 }
+
+@media (min-width: 800px) {
+ .validate-button {
+  padding: 10px 0;
+ }
+}

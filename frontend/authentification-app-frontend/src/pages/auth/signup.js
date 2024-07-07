@@ -41,8 +41,9 @@ function SignUp() {
 
   return (
 
-    <div className='auth-container'>
+  <div className='auth-page-container'>
 
+    <div className='auth-container'>
       <TopAuth
         titleText='Create new account'
       />
@@ -87,6 +88,8 @@ function SignUp() {
       <SocialLinks />
 
     </div>
+
+  </div>
   )
 }
 

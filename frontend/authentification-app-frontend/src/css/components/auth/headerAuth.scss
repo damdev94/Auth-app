@@ -34,3 +34,31 @@
   }
 
 }
+
+@media (min-width: 800px) {
+  .headerAuth {
+
+    .logo {
+
+      span{
+        font-size: 14px;
+      }
+    }
+
+    .presentation-text {
+
+      p{
+        font-size: 14px;
+      }
+    }
+
+    .title-page {
+      color: #2F80ED;
+      font-size: 16px;
+      text-align: center;
+      margin-top: 15%;
+      font-weight: bold
+    }
+
+  }
+}

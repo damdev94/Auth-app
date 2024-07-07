@@ -36,7 +36,7 @@ function SignIn() {
       .then(res => {
         console.log('User connected !')
         login(res.data.token, emailData)
-        navigate('/userinfos')
+        navigate('/profile')
       })
       .catch(err => {
         setLoginError(true)
@@ -45,48 +45,50 @@ function SignIn() {
   }
 
   return (
-    <div className='auth-container'>
-       <TopAuth
-        titleText='Log In'
-       />
-
-    <div className="inputs">
-
-      {loginError && (
-        <div className="error-login-message">
-          <p>Your Email or your password is incorrect, try again</p>
-        </div>
-      )}
-
-        <InputForm
-          type='email'
-          placeholder='Email'
-          value={emailData}
-          onChange={(e) => setEmailData(e.target.value)}
-          icon={faEnvelope}
+    <div className='auth-page-container'>
+      <div className='auth-container'>
+        <TopAuth
+          titleText='Log In'
         />
 
-        <InputForm
-          type='password'
-          placeholder='Password'
-          value={passwordData}
-          onChange={(e) => setPasswordData(e.target.value)}
-          icon={faLock}
-        />
+      <div className="inputs">
 
-        <div className="signup-link">
-          Not account yet ? &nbsp;
-          <Link to='/signup'>Create an account</Link>
-        </div>
+        {loginError && (
+          <div className="error-login-message">
+            <p>Your Email or your password is incorrect, try again</p>
+          </div>
+        )}
 
-    </div>
+          <InputForm
+            type='email'
+            placeholder='Email'
+            value={emailData}
+            onChange={(e) => setEmailData(e.target.value)}
+            icon={faEnvelope}
+          />
 
-    <Link className="validation" to= '/signin' onClick={submitSignup}>
-      <ValidateButton text='Connexion'/>
-    </Link>
+          <InputForm
+            type='password'
+            placeholder='Password'
+            value={passwordData}
+            onChange={(e) => setPasswordData(e.target.value)}
+            icon={faLock}
+          />
 
-      <SocialLinks />
+          <div className="signup-link">
+            Not account yet ? &nbsp;
+            <Link to='/signup'>Create an account</Link>
+          </div>
 
+      </div>
+
+      <Link className="validation" to= '/signin' onClick={submitSignup}>
+        <ValidateButton text='Connexion'/>
+      </Link>
+
+        <SocialLinks />
+
+      </div>
     </div>
   )
 }

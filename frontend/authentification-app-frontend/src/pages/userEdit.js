@@ -83,7 +83,7 @@ function UserEdit() {
     })
     .then(res => {
       console.log('User updated !')
-      navigate('/userinfos')
+      navigate('/profile')
     })
     .catch(err => {
       console.error('Error update user:', err)
@@ -94,10 +94,12 @@ function UserEdit() {
     <div className='userEdit-container'>
       <TopBar />
 
-      <div className="back-button">
+    <div className="back-button">
       <FontAwesomeIcon icon={faArrowLeft} />
-        <Link to='/userinfos'>Back</Link>
-      </div>
+      <Link to='/profile'>Back</Link>
+    </div>
+
+    <div className="content-container">
 
       <div className='page-title'>
         <h1>Change info</h1>
@@ -160,14 +162,16 @@ function UserEdit() {
 
         <div className="validation">
 
-        <Link to='/userinfos' onClick={handleSubmit}>
+        <Link className='submit-button' to='/profile' onClick={handleSubmit}>
           <ValidateButton
-              text= 'Submit'
+              text= 'Save'
           />
         </Link>
 
         </div>
       </div>
+
+    </div>
 
     </div>
   )

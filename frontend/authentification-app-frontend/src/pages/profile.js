@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../functions/auth/authContext'
 import axios from 'axios'
-import '../css/pages/userInfos.scss'
+import '../css/pages/profile.scss'
 import TopBar from '../components/topBar'
 import { Link } from 'react-router-dom'
 
-function UserInfos() {
+function Profile() {
 
   const {logout, user, token, userEmail} = useAuth()
   const [userInfos, setUserInfos] = useState(null)
@@ -52,32 +52,35 @@ function UserInfos() {
         <p>Basic info, like your name and photo</p>
       </div>
 
-      <div className="profile-header">
-        <div className="title">
-          <h2>Profile</h2>
-          <p>Some infos may be visible to other people</p>
-        </div>
-        <Link to= '/userinfos/edit' className="edit-button">
-          Edit
-        </Link>
-      </div>
 
-      <div className="infos-list">
-        <div className="info">
-          <h4>Photo</h4>
-          <img src={userInfos && (`http://localhost:5000${userInfos.photo}`)} alt='profile-picture' />
+      <div className="profile-container">
+        <div className="profile-header">
+          <div className="title">
+            <h2>Profile</h2>
+            <p>Some infos may be visible to other people</p>
+          </div>
+          <Link to= '/profile/edit' className="edit-button">
+            Edit
+          </Link>
         </div>
-        <div className="info">
-          <h4>Phone</h4>
-          <p>{userInfos && (userInfos.phone)}</p>
-        </div>
-        <div className="info">
-          <h4>Email</h4>
-          <p>{userInfos && (userInfos.email)}</p>
-        </div>
-        <div className="info">
-          <h4>Password</h4>
-          <p>********</p>
+
+        <div className="infos-list">
+          <div className="info">
+            <h4>Photo</h4>
+            <img src={userInfos && (`http://localhost:5000${userInfos.photo}`)} alt='profile-picture' />
+          </div>
+          <div className="info">
+            <h4>Phone</h4>
+            <p>{userInfos && (userInfos.phone)}</p>
+          </div>
+          <div className="info">
+            <h4>Email</h4>
+            <p>{userInfos && (userInfos.email)}</p>
+          </div>
+          <div className="info">
+            <h4>Password</h4>
+            <p>********</p>
+          </div>
         </div>
       </div>
 
@@ -85,4 +88,4 @@ function UserInfos() {
   )
 }
 
-export default UserInfos
+export default Profile
